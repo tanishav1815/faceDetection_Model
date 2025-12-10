@@ -1,53 +1,105 @@
-# Face Detection Desktop App
+# 👁️ Sentinel: AI Vision System
 
-A production-ready real-time face detection application built with Python, OpenCV, Tkinter, and MySQL.
+> **"Seeing beyond the frame."**
 
-## Features
-- **Real-time Face Detection**: Uses Haar Cascades.
-- **Performance Optimized**: Multithreaded video processing to maintain UI responsiveness.
-- **Hardware Acceleration**: Supports GPU acceleration via CUDA (if available) with CPU fallback.
-- **Data Logging**: Logs detection events and benchmark metrics to a MySQL database.
-- **GUI Controls**: Start/Stop detection, GPU toggle, and Benchmark mode.
+![AI Vision](https://img.shields.io/badge/AI-Powered-blueviolet) ![Status](https://img.shields.io/badge/Status-Active-success) ![Python](https://img.shields.io/badge/Python-3.x-blue) ![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
 
-## Requirements
-- Python 3.x
-- MySQL Server (running on localhost)
+**Sentinel** is a high-performance, real-time computer vision application designed to turn your webcam into an intelligent observer. It doesn't just see pixels; it understands **people**, **genders**, and **objects**.
 
-## Installation
+Built with a robust multithreaded architecture, Sentinel combines classic Computer Vision (Haar Cascades) with state-of-the-art Deep Learning (YOLOv4, Caffe) to deliver a seamless detection experience.
 
-1.  **Clone the repository/folder**.
-2.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *(Note: `opencv-python` is used. For GPU support, ensure you have CUDA installed and a compatible OpenCV build, or install `opencv-python` and rely on CPU fallback).*
-3.  **Database Setup**:
-    - Ensure your MySQL server is running.
-    - Update `config.py` with your MySQL credentials (password primarily).
-    ```python
-    # config.py
-    DB_PASSWORD = "your_password"
-    ```
+---
 
-## Usage
+## 🚀 Features
 
-1.  **Run the Application**:
-    ```bash
-    python main.py
-    ```
-    - The app will automatically initialize the database `face_detection_db` and tables.
-    - It will check for the Haar Cascade XML and copy it to `data/` if needed.
+### 🧠 **Triple-Threat Detection Engine**
+*   **👤 Face Detection**: Instantly locks onto human faces with millisecond precision using accelerated Haar Cascades.
+*   **⚧ Gender Recognition**: Analyzes facial features to predict gender (Male/Female) in real-time.
+*   **📦 Object Recognition (YOLOv4)**: Leveraging the massive **YOLOv4 High-Accuracy Model**, Sentinel identifies **80+ types of objects** including:
+    *   📱 **Tech**: Cell phones, laptops, remotes, keyboards.
+    *   🏠 **Household**: Bottles, cups, books, scissors, vases.
+    *   🚗 **Transport**: Cars, bicycles, buses.
+    *   ...and much more!
 
-2.  **Controls**:
-    - **Start Detection**: specific button to enable face detection overlays.
-    - **Mode**: Toggle between CPU and GPU (requires CUDA) for detection.
-    - **Run Benchmark**: Runs a 10-second performance test and logs FPS/Latency to the database.
+### ⚡ **High-Performance Architecture**
+*   **Multithreaded Core**: Video capture and AI inference run on separate threads, ensuring your UI remains buttery smooth while the brain crunches numbers.
+*   **Smart GPU Offloading**: Automatically detects CUDA-enabled GPUs to accelerate processing (with graceful CPU fallback).
 
-## Folder Structure
-- `main.py`: Entry point.
-- `gui.py`: Tkinter GUI implementation.
-- `detection.py`: Face detection logic (Haar/CUDA).
-- `threading_manager.py`: Video capture handling in separate thread.
-- `db.py`: Database management.
-- `config.py`: Application configuration.
-- `data/`: Stores XML models and schema.
+### 📊 **Data-Driven Insights**
+*   **MySQL Integration**: Automatically logs every detection event and performance benchmark into a local database.
+*   **Benchmarking Mode**: Press a button to stress-test your system and record Frame-Time and Latency metrics.
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/tanishav1815/faceDetection_Model.git
+cd faceDetection_Model
+```
+
+### 2. Setup Environment
+We recommend using a virtual environment.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. Database Setup (Optional)
+Sentinel uses MySQL for logging. Ensure you have a MySQL server running (default user `root`, no password).
+*   *Note*: The app works even without the database (it will just skip logging).
+*   To check logs later: `USE face_detection_db; SELECT * FROM detections;`
+
+---
+
+## 🎮 Usage
+
+Simply run the main script. The system handles the rest, including **automatically downloading** the massive AI models (245MB+) on the first run.
+
+```bash
+python main.py
+```
+
+### **Controls**
+| Key | Action |
+| :--- | :--- |
+| **`S`** | **Start/Stop** the AI Detection engine. |
+| **`B`** | Run a **10-Second Benchmark** test. |
+| **`G`** | Toggle **GPU/CPU** mode (if hardware supported). |
+| **`Q`** | **Quit** the application safely. |
+
+---
+
+## 🏗️ Under the Hood
+
+### **The Stack**
+*   **Language**: Python 3.9+
+*   **Vision**: OpenCV 4.12 (DNN Module)
+*   **Models**:
+    *   *YOLOv4 (Darknet)*: For general object detection.
+    *   *Caffe (GoogLeNet)*: For age/gender classification.
+    *   *Haar Cascades*: For rapid face localization.
+*   **Data**: MySQL Connector
+
+### **Configuration**
+Check `config.py` to tweak settings:
+*   `USE_FULL_YOLO_MODEL`: Set to `True` for accuracy (default), `False` for speed (Tiny mode).
+*   `CAMERA_INDEX`: Change if you have multiple webcams.
+*   `DB_CONFIG`: Update your database credentials.
+
+---
+
+## 🤝 Contributing
+
+Got an idea to make Sentinel smarter?
+1.  Fork the repo.
+2.  Create a branch: `git checkout -b feature/super-vision`
+3.  Commit changes: `git commit -m 'Add x-ray vision'`
+4.  Push: `git push origin feature/super-vision`
+5.  Open a Pull Request!
+
+---
+
+> *Built with code and caffeine by Tanisha.*
